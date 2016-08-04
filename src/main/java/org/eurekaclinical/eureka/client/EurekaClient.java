@@ -46,7 +46,6 @@ import org.eurekaclinical.eureka.client.comm.SourceConfigParams;
 import org.eurekaclinical.eureka.client.comm.Statistics;
 import org.eurekaclinical.eureka.client.comm.SystemPhenotype;
 import org.eurekaclinical.eureka.client.comm.User;
-import org.eurekaclinical.eureka.client.comm.UserRequest;
 import org.eurekaclinical.standardapis.exception.HttpStatusException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
