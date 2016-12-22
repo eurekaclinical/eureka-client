@@ -25,6 +25,6 @@ package org.eurekaclinical.eureka.client.comm;
  * @author Andrew Post
  */
 public enum DestinationType {
-	I2B2, COHORT, PATIENT_SET_EXTRACTOR
+	I2B2, COHORT, PATIENT_SET_EXTRACTOR, PATIENT_SET_SENDER
     
 }

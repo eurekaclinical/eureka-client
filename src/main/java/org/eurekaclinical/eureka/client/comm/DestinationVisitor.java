@@ -1,10 +1,5 @@
 package org.eurekaclinical.eureka.client.comm;
 
-import org.eurekaclinical.eureka.client.comm.PatientSetExtractorDestination;
-import org.eurekaclinical.eureka.client.comm.CohortDestination;
-import org.eurekaclinical.eureka.client.comm.Neo4jDestination;
-import org.eurekaclinical.eureka.client.comm.I2B2Destination;
-
 /*
  * #%L
  * Eureka Common
@@ -24,17 +19,19 @@ import org.eurekaclinical.eureka.client.comm.I2B2Destination;
  * limitations under the License.
  * #L%
  */
-
 /**
  *
  * @author Andrew Post
  */
 public interface DestinationVisitor {
-	void visit(CohortDestination cohortDestination);
-	
-	void visit(I2B2Destination i2b2Destination);
-	
-	void visit(Neo4jDestination neo4jDestination);
-	
-	void visit(PatientSetExtractorDestination patientSetSenderDestination);
+
+    void visit(CohortDestination cohortDestination);
+
+    void visit(I2B2Destination i2b2Destination);
+
+    void visit(Neo4jDestination neo4jDestination);
+
+    void visit(PatientSetExtractorDestination patientSetExtractorDestination);
+    
+    void visit(PatientSetSenderDestination patientSetSenderDestination);
 }

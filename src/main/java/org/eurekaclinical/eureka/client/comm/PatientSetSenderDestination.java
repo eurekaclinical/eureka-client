@@ -23,12 +23,12 @@ package org.eurekaclinical.eureka.client.comm;
  *
  * @author Andrew Post
  */
-public class PatientSetExtractorDestination extends Destination {
-
+public class PatientSetSenderDestination extends Destination {
     private String aliasPropositionId;
     private String aliasFieldNameProperty;
     private String aliasFieldName;
     private String aliasPatientIdProperty;
+    private String patientSetService;
 
     @Override
     public void accept(DestinationVisitor destinationVisitor) {
@@ -67,5 +67,12 @@ public class PatientSetExtractorDestination extends Destination {
         this.aliasPatientIdProperty = aliasPatientIdProperty;
     }
 
-    
+    public String getPatientSetService() {
+        return patientSetService;
+    }
+
+    public void setPatientSetService(String patientSetService) {
+        this.patientSetService = patientSetService;
+    }
+
 }
