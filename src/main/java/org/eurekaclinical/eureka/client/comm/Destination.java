@@ -40,7 +40,8 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
     @JsonSubTypes.Type(value = I2B2Destination.class, name = "I2B2"),
     @JsonSubTypes.Type(value = Neo4jDestination.class, name = "NEO4J"),
     @JsonSubTypes.Type(value = PatientSetExtractorDestination.class, name = "PATIENTSETEXTRACTOR"),
-    @JsonSubTypes.Type(value = PatientSetSenderDestination.class, name = "PATIENTSETSENDER")
+    @JsonSubTypes.Type(value = PatientSetSenderDestination.class, name = "PATIENTSETSENDER"),
+    @JsonSubTypes.Type(value = TabularFileDestination.class, name = "TABULARFILE")
 })
 public abstract class Destination {
 
