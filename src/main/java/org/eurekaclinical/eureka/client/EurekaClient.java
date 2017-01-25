@@ -31,6 +31,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import org.eurekaclinical.common.comm.Role;
+import org.eurekaclinical.common.comm.User;
 import org.eurekaclinical.common.comm.clients.ClientException;
 import org.eurekaclinical.common.comm.clients.EurekaClinicalClient;
 import org.eurekaclinical.eureka.client.comm.CohortDestination;
@@ -45,7 +46,6 @@ import org.eurekaclinical.eureka.client.comm.SourceConfig;
 import org.eurekaclinical.eureka.client.comm.SourceConfigParams;
 import org.eurekaclinical.eureka.client.comm.Statistics;
 import org.eurekaclinical.eureka.client.comm.SystemPhenotype;
-import org.eurekaclinical.eureka.client.comm.User;
 import org.eurekaclinical.standardapis.exception.HttpStatusException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -120,21 +120,6 @@ public class EurekaClient extends EurekaClinicalClient {
         final String path = "/proxy-resource/users/" + inUserId;
         return doGet(path, User.class);
     }
-
-    /*public void addUser(UserRequest inRequest) throws ClientException {
-        final String path = "/proxy-resource/userrequests";
-        doPostCreate(path, inRequest);
-    }
-
-    public void resetPassword(String username) throws ClientException {
-        final String path = "/proxy-resource/passwordreset/" + username;
-        doPost(path);
-    }
-
-    public void verifyUser(String inCode) throws ClientException {
-        final String path = "/proxy-resource/userrequests/verify/" + inCode;
-        doPut(path);
-    }*/
 
     public void changePassword(String inOldPass, String inNewPass) throws ClientException {
         final String path = "/proxy-resource/users/passwordchange";
