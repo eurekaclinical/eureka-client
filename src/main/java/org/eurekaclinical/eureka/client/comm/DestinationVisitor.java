@@ -36,4 +36,6 @@ public interface DestinationVisitor {
     void visit(PatientSetSenderDestination patientSetSenderDestination);
     
     void visit(TabularFileDestination tabularFileDestination);
+    
+    void visit(RelDbDestination relDbDestination);
 }

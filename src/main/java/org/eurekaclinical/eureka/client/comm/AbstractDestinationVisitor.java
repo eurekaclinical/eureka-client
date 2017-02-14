@@ -19,14 +19,13 @@ package org.eurekaclinical.eureka.client.comm;
  * limitations under the License.
  * #L%
  */
-
 /**
  *
  * @author arpost
  */
 public abstract class AbstractDestinationVisitor implements DestinationVisitor {
 
-	protected AbstractDestinationVisitor() {
-	}
-	
+    protected AbstractDestinationVisitor() {
+    }
+
 }
