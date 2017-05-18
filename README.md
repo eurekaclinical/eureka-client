@@ -1,11 +1,11 @@
-# Eureka! Clinical Analytics REST API Client
+# Eureka! Clinical Analytics Client
 [Atlanta Clinical and Translational Science Institute (ACTSI)](http://www.actsi.org), [Emory University](http://www.emory.edu), Atlanta, GA
 
 ## What does it do?
 It is a library for accessing Eureka! Clinical Analytics REST APIs from Java applications. It provides two REST API clients:
 
-EurekaClient.java: for web clients to call Eureka REST APIs via the eureka-webapp proxy.
-EurekaProxyClient.java: for Java applications to call Eureka REST APIs directly using eureka-service.
+* EurekaClient.java: for web clients to call Eureka REST APIs via the eureka-webapp proxy.
+* EurekaProxyClient.java: for Java applications to call Eureka REST APIs directly using eureka-service.
 
 ## Version 3.0 development series
 Latest release: [![Latest release](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eureka-client/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eureka-client)
