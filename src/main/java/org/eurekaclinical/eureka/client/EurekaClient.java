@@ -21,19 +21,23 @@ package org.eurekaclinical.eureka.client;
  */
 
 import com.sun.jersey.api.client.GenericType;
+import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
+import com.sun.jersey.multipart.FormDataBodyPart;
+import com.sun.jersey.multipart.FormDataMultiPart;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import org.eurekaclinical.common.comm.Role;
 import org.eurekaclinical.common.comm.User;
+import org.eurekaclinical.common.comm.clients.AuthorizingEurekaClinicalClient;
 import org.eurekaclinical.common.comm.clients.ClientException;
-import org.eurekaclinical.common.comm.clients.EurekaClinicalClient;
 import org.eurekaclinical.eureka.client.comm.CohortDestination;
 import org.eurekaclinical.eureka.client.comm.Destination;
 import org.eurekaclinical.eureka.client.comm.DestinationType;
@@ -54,7 +58,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Andrew Post
  */
-public class EurekaClient extends EurekaClinicalClient {
+public class EurekaClient extends AuthorizingEurekaClinicalClient {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EurekaClient.class);
     
@@ -94,28 +98,31 @@ public class EurekaClient extends EurekaClinicalClient {
     private static final GenericType<List<String>> SystemPhenotypeSearchResultsList = new GenericType<List<String>>() {
     };
 
-    private final String eurekaUrl;
+    private final URI eurekaUrl;
 
     public EurekaClient(String inEurekaUrl) {
         super(null);
-        this.eurekaUrl = inEurekaUrl;
+        this.eurekaUrl = URI.create(inEurekaUrl);
     }
 
     @Override
-    protected String getResourceUrl() {
+    protected URI getResourceUrl() {
         return this.eurekaUrl;
     }
 
+    @Override
     public List<User> getUsers() throws ClientException {
         final String path = "/proxy-resource/users";
         return doGet(path, UserList);
     }
 
+    @Override
     public User getMe() throws ClientException {
         String path = "/proxy-resource/users/me";
         return doGet(path, User.class);
     }
 
+    @Override
     public User getUserById(Long inUserId) throws ClientException {
         final String path = "/proxy-resource/users/" + inUserId;
         return doGet(path, User.class);
@@ -135,16 +142,19 @@ public class EurekaClient extends EurekaClinicalClient {
         doPut(path, inUser);
     }
 
+    @Override
     public List<Role> getRoles() throws ClientException {
         final String path = "/proxy-resource/roles";
         return doGet(path, RoleList);
     }
 
+    @Override
     public Role getRole(Long inRoleId) throws ClientException {
         final String path = "/proxy-resource/roles/" + inRoleId;
         return doGet(path, Role.class);
     }
 
+    @Override
     public Role getRoleByName(String name) throws ClientException {
         return doGet("/proxy-resource/roles/byname/" + name, Role.class);
     }
@@ -163,7 +173,15 @@ public class EurekaClient extends EurekaClinicalClient {
                 .segment(sourceId)
                 .segment(fileTypeId)
                 .build().toString();
-        doPostMultipart(path, fileName, inputStream);
+        FormDataMultiPart part = new FormDataMultiPart();
+        part.bodyPart(
+                new FormDataBodyPart(
+                        FormDataContentDisposition
+                                .name("file")
+                                .fileName(fileName)
+                                .build(),
+                        inputStream, MediaType.APPLICATION_OCTET_STREAM_TYPE));
+        doPostMultipart(path, part);
     }
 
     public Job getJob(Long jobId) throws ClientException {
@@ -222,32 +240,6 @@ public class EurekaClient extends EurekaClinicalClient {
             }
         }
         return result;
-    }
-
-    public URI proxyPost(final String path, final String json)
-            throws ClientException {
-        return doPostCreate(path, json);
-    }
-
-    public void proxyDelete(final String path)
-            throws ClientException {
-
-        doDelete(path);
-    }
-
-    public void proxyPut(final String path, final String json)
-            throws ClientException {
-        doPut(path, json);
-    }
-
-    public String proxyGet(final String path, MultivaluedMap queryParams)
-            throws ClientException {
-        if (queryParams == null) {
-            return doGet(path);
-        } else {
-            return doGet(path, queryParams);
-        }
-
     }
 
     public List<Phenotype> getUserPhenotypes(boolean summarized) throws ClientException {
@@ -334,7 +326,7 @@ public class EurekaClient extends EurekaClinicalClient {
         formParams.add("summarize", Boolean.toString(summarize));
         String path = UriBuilder.fromPath("/proxy-resource/concepts/")
                 .build().toString();
-        return doPost(path, SystemPhenotypeList, formParams);
+        return doPost(path, formParams, SystemPhenotypeList);
     }
 
     public SystemPhenotype getSystemPhenotype(String inKey, boolean summarize) throws ClientException {
