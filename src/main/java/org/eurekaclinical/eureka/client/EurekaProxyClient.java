@@ -108,44 +108,9 @@ public class EurekaProxyClient extends AuthorizingEurekaClinicalProxyClient {
         return this.eurekaUrl;
     }
 
-    @Override
-    public List<User> getUsers() throws ClientException {
-        final String path = "/api/protected/users";
-        return doGet(path, UserList);
-    }
-
-    @Override
-    public User getMe() throws ClientException {
-        String path = "/api/protected/users/me";
-        return doGet(path, User.class);
-    }
-
-    @Override
-    public User getUserById(Long inUserId) throws ClientException {
-        final String path = "/api/protected/users/" + inUserId;
-        return doGet(path, User.class);
-    }
-
     public void updateUser(User inUser, Long userId) throws ClientException {
         final String path = "/api/protected/users/" + userId;
         doPut(path, inUser);
-    }
-
-    @Override
-    public List<Role> getRoles() throws ClientException {
-        final String path = "/api/protected/roles";
-        return doGet(path, RoleList);
-    }
-
-    @Override
-    public Role getRole(Long inRoleId) throws ClientException {
-        final String path = "/api/protected/roles/" + inRoleId;
-        return doGet(path, Role.class);
-    }
-
-    @Override
-    public Role getRoleByName(String name) throws ClientException {
-        return doGet("/api/protected/roles/byname/" + name, Role.class);
     }
 
     public Long submitJob(JobSpec inUpload) throws ClientException {

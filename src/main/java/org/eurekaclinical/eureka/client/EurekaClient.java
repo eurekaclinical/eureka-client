@@ -110,24 +110,6 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
         return this.eurekaUrl;
     }
 
-    @Override
-    public List<User> getUsers() throws ClientException {
-        final String path = "/proxy-resource/users";
-        return doGet(path, UserList);
-    }
-
-    @Override
-    public User getMe() throws ClientException {
-        String path = "/proxy-resource/users/me";
-        return doGet(path, User.class);
-    }
-
-    @Override
-    public User getUserById(Long inUserId) throws ClientException {
-        final String path = "/proxy-resource/users/" + inUserId;
-        return doGet(path, User.class);
-    }
-
     public void changePassword(String inOldPass, String inNewPass) throws ClientException {
         final String path = "/proxy-resource/users/passwordchange";
         PasswordChangeRequest passwordChangeRequest
@@ -140,23 +122,6 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
     public void updateUser(User inUser, Long userId) throws ClientException {
         final String path = "/proxy-resource/users/" + userId;
         doPut(path, inUser);
-    }
-
-    @Override
-    public List<Role> getRoles() throws ClientException {
-        final String path = "/proxy-resource/roles";
-        return doGet(path, RoleList);
-    }
-
-    @Override
-    public Role getRole(Long inRoleId) throws ClientException {
-        final String path = "/proxy-resource/roles/" + inRoleId;
-        return doGet(path, Role.class);
-    }
-
-    @Override
-    public Role getRoleByName(String name) throws ClientException {
-        return doGet("/proxy-resource/roles/byname/" + name, Role.class);
     }
 
     public Long submitJob(JobSpec inUpload) throws ClientException {
