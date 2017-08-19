@@ -19,7 +19,6 @@ package org.eurekaclinical.eureka.client;
  * limitations under the License.
  * #L%
  */
-
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
@@ -44,7 +43,6 @@ import org.eurekaclinical.eureka.client.comm.DestinationType;
 import org.eurekaclinical.eureka.client.comm.I2B2Destination;
 import org.eurekaclinical.eureka.client.comm.Job;
 import org.eurekaclinical.eureka.client.comm.JobSpec;
-import org.eurekaclinical.eureka.client.comm.PasswordChangeRequest;
 import org.eurekaclinical.eureka.client.comm.Phenotype;
 import org.eurekaclinical.eureka.client.comm.SourceConfig;
 import org.eurekaclinical.eureka.client.comm.SourceConfigParams;
@@ -61,7 +59,7 @@ import org.slf4j.LoggerFactory;
 public class EurekaClient extends AuthorizingEurekaClinicalClient {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EurekaClient.class);
-    
+
     /*private static final GenericType<List<TimeUnit>> TimeUnitList = new GenericType<List<TimeUnit>>() {
     };
     private static final GenericType<List<FrequencyType>> FrequencyTypeList = new GenericType<List<FrequencyType>>() {
@@ -110,31 +108,22 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
         return this.eurekaUrl;
     }
 
-    public void changePassword(String inOldPass, String inNewPass) throws ClientException {
-        final String path = "/proxy-resource/users/passwordchange";
-        PasswordChangeRequest passwordChangeRequest
-                = new PasswordChangeRequest();
-        passwordChangeRequest.setOldPassword(inOldPass);
-        passwordChangeRequest.setNewPassword(inNewPass);
-        doPost(path, passwordChangeRequest);
-    }
-
     public void updateUser(User inUser, Long userId) throws ClientException {
-        final String path = "/proxy-resource/users/" + userId;
+        final String path = "/api/protected/users/" + userId;
         doPut(path, inUser);
     }
 
     public Long submitJob(JobSpec inUpload) throws ClientException {
-        final String path = "/proxy-resource/jobs";
+        final String path = "/api/protected/jobs";
         URI jobUri = doPostCreate(path, inUpload);
         return extractId(jobUri);
     }
-    
+
     public void upload(String fileName, String sourceId,
             String fileTypeId, InputStream inputStream)
             throws ClientException {
         String path = UriBuilder
-                .fromPath("/proxy-resource/file/upload/")
+                .fromPath("/api/protected/file/upload/")
                 .segment(sourceId)
                 .segment(fileTypeId)
                 .build().toString();
@@ -150,7 +139,7 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
     }
 
     public Job getJob(Long jobId) throws ClientException {
-        final String path = "/proxy-resource/jobs/" + jobId;
+        final String path = "/api/protected/jobs/" + jobId;
         return doGet(path, Job.class);
     }
 
@@ -158,7 +147,7 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
         if (jobId == null) {
             throw new IllegalArgumentException("jobId cannot be null");
         }
-        UriBuilder uriBuilder = UriBuilder.fromPath("/proxy-resource/jobs/{arg1}/stats/");
+        UriBuilder uriBuilder = UriBuilder.fromPath("/api/protected/jobs/{arg1}/stats/");
         if (propId != null) {
             uriBuilder = uriBuilder.segment(propId);
         }
@@ -167,19 +156,19 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
     }
 
     public List<Job> getJobs() throws ClientException {
-        final String path = "/proxy-resource/jobs";
+        final String path = "/api/protected/jobs";
         return doGet(path, JobList);
     }
 
     public List<Job> getJobsDesc() throws ClientException {
-        final String path = "/proxy-resource/jobs";
+        final String path = "/api/protected/jobs";
         MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
         queryParams.add("order", "desc");
         return doGet(path, JobList, queryParams);
     }
 
     public List<Job> getLatestJob() throws ClientException {
-        final String path = "/proxy-resource/jobs/latest";
+        final String path = "/api/protected/jobs/latest";
         return doGet(path, JobList);
     }
 
@@ -208,7 +197,7 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
     }
 
     public List<Phenotype> getUserPhenotypes(boolean summarized) throws ClientException {
-        final String path = "/proxy-resource/phenotypes";
+        final String path = "/api/protected/phenotypes";
         if (summarized) {
             MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
             queryParams.add("summarize", "true");
@@ -229,7 +218,7 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
 		 * string can't be templated because the slashes won't be encoded!
          */
         String path = UriBuilder
-                .fromPath("/proxy-resource/phenotypes/")
+                .fromPath("/api/protected/phenotypes/")
                 .segment(inKey)
                 .build().toString();
 
@@ -243,7 +232,7 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
     }
 
     public URI saveUserPhenotype(Phenotype inPhenotype) throws ClientException {
-        final String path = "/proxy-resource/phenotypes";
+        final String path = "/api/protected/phenotypes";
         URI phenotypeURI = doPostCreate(path, inPhenotype);
         return phenotypeURI;
     }
@@ -253,7 +242,7 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
         if (inId == null) {
             throw new IllegalArgumentException("inId cannot be null");
         }
-        final String path = "/proxy-resource/phenotypes/" + inId;
+        final String path = "/api/protected/phenotypes/" + inId;
         doPut(path, inPhenotype);
     }
 
@@ -271,12 +260,12 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
 		 * encoded. We use UriBuilder to guarantee a valid URL. The inKey
 		 * string can't be templated because the slashes won't be encoded!
          */
-        final String path = "/proxy-resource/phenotypes/" + inId;
+        final String path = "/api/protected/phenotypes/" + inId;
         doDelete(path);
     }
 
     public List<SystemPhenotype> getSystemPhenotypes() throws ClientException {
-        final String path = UriBuilder.fromPath("/proxy-resource/concepts/").build().toString();
+        final String path = UriBuilder.fromPath("/api/protected/concepts/").build().toString();
         return doGet(path, SystemPhenotypeList);
     }
 
@@ -289,7 +278,7 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
             formParams.add("key", key);
         }
         formParams.add("summarize", Boolean.toString(summarize));
-        String path = UriBuilder.fromPath("/proxy-resource/concepts/")
+        String path = UriBuilder.fromPath("/api/protected/concepts/")
                 .build().toString();
         return doPost(path, formParams, SystemPhenotypeList);
     }
@@ -304,127 +293,126 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
     }
 
     /*public List<TimeUnit> getTimeUnitsAsc() throws ClientException {
-        final String path = "/proxy-resource/timeunits";
+        final String path = "/api/protected/timeunits";
         return doGet(path, TimeUnitList);
     }
 
     public TimeUnit getTimeUnit(Long inId) throws ClientException {
-        final String path = "/proxy-resource/timeunits/" + inId;
+        final String path = "/api/protected/timeunits/" + inId;
         return doGet(path, TimeUnit.class);
     }
 
     public TimeUnit getTimeUnitByName(String inName) throws ClientException {
-        final String path = UriBuilder.fromPath("/proxy-resource/timeunits/byname/")
+        final String path = UriBuilder.fromPath("/api/protected/timeunits/byname/")
                 .segment(inName)
                 .build().toString();
         return doGet(path, TimeUnit.class);
     }
 
     public List<RelationOperator> getRelationOperatorsAsc() throws ClientException {
-        final String path = "/proxy-resource/relationops";
+        final String path = "/api/protected/relationops";
         return doGet(path, RelationOperatorList);
     }
 
     public RelationOperator getRelationOperator(Long inId) throws ClientException {
-        final String path = "/proxy-resource/relationops/" + inId;
+        final String path = "/api/protected/relationops/" + inId;
         return doGet(path, RelationOperator.class);
     }
 
     public RelationOperator getRelationOperatorByName(String inName) throws ClientException {
-        final String path = UriBuilder.fromPath("/proxy-resource/relationops/byname/")
+        final String path = UriBuilder.fromPath("/api/protected/relationops/byname/")
                 .segment(inName)
                 .build().toString();
         return doGet(path, RelationOperator.class);
     }
 
     public OAuthProvider getOAuthProvider(Long inId) throws ClientException {
-        final String path = "/proxy-resource/oauthproviders/" + inId;
+        final String path = "/api/protected/oauthproviders/" + inId;
         return doGet(path, OAuthProvider.class);
     }
 
     public OAuthProvider getOAuthProviderByName(String inName) throws ClientException {
-        final String path = UriBuilder.fromPath("/proxy-resource/oauthproviders/byname/")
+        final String path = UriBuilder.fromPath("/api/protected/oauthproviders/byname/")
                 .segment(inName)
                 .build().toString();
         return doGet(path, OAuthProvider.class);
     }
 
     public List<ThresholdsOperator> getThresholdsOperators() throws ClientException {
-        final String path = "/proxy-resource/thresholdsops/";
+        final String path = "/api/protected/thresholdsops/";
         return doGet(path, ThresholdsOperatorList);
     }
 
     public ThresholdsOperator getThresholdsOperator(Long inId) throws ClientException {
-        final String path = "/proxy-resource/thresholdsops/" + inId;
+        final String path = "/api/protected/thresholdsops/" + inId;
         return doGet(path, ThresholdsOperator.class);
     }
 
     public ThresholdsOperator getThresholdsOperatorByName(
             String inName) throws ClientException {
-        final String path = UriBuilder.fromPath("/proxy-resource/thresholdsops/byname/")
+        final String path = UriBuilder.fromPath("/api/protected/thresholdsops/byname/")
                 .segment(inName)
                 .build().toString();
         return doGet(path, ThresholdsOperator.class);
     }
 
     public List<ValueComparator> getValueComparatorsAsc() throws ClientException {
-        final String path = "/proxy-resource/valuecomps";
+        final String path = "/api/protected/valuecomps";
         return doGet(path, ValueComparatorList);
     }
 
     public ValueComparator getValueComparator(Long inId) throws ClientException {
-        final String path = "/proxy-resource/valuecomps/" + inId;
+        final String path = "/api/protected/valuecomps/" + inId;
         return doGet(path, ValueComparator.class);
     }
 
     public ValueComparator getValueComparatorByName(String inName) throws ClientException {
-        final String path = UriBuilder.fromPath("/proxy-resource/valuecomps/byname/")
+        final String path = UriBuilder.fromPath("/api/protected/valuecomps/byname/")
                 .segment(inName)
                 .build().toString();
         return doGet(path, ValueComparator.class);
     }
 
     public List<FrequencyType> getFrequencyTypesAsc() throws ClientException {
-        final String path = "/proxy-resource/frequencytypes";
+        final String path = "/api/protected/frequencytypes";
         return doGet(path, FrequencyTypeList);
     }*/
-
     public List<SourceConfig> getSourceConfigs() throws ClientException {
-        String path = "/proxy-resource/sourceconfig";
+        String path = "/api/protected/sourceconfig";
         return doGet(path, SourceConfigList);
     }
 
     public SourceConfig getSourceConfig(String sourceConfigId) throws ClientException {
-        String path = UriBuilder.fromPath("/proxy-resource/sourceconfig/")
+        String path = UriBuilder.fromPath("/api/protected/sourceconfig/")
                 .segment(sourceConfigId)
                 .build().toString();
         return doGet(path, SourceConfig.class);
     }
 
     public List<SourceConfigParams> getSourceConfigParams() throws ClientException {
-        String path = "/proxy-resource/sourceconfig/parameters/list";
+        String path = "/api/protected/sourceconfig/parameters/list";
         return doGet(path, SourceConfigParamsList);
     }
 
     public Long createDestination(Destination destination) throws ClientException {
-        String path = "/proxy-resource/destinations";
+        String path = "/api/protected/destinations";
         URI destURI = doPostCreate(path, destination);
         return extractId(destURI);
     }
 
     public void updateDestination(Destination destination) throws ClientException {
-        String path = "/proxy-resource/destinations";
+        String path = "/api/protected/destinations";
         doPut(path, destination);
     }
 
     public List<Destination> getDestinations() throws ClientException {
-        String path = "/proxy-resource/destinations";
+        String path = "/api/protected/destinations";
         return doGet(path, DestinationList);
     }
 
     public List<CohortDestination> getCohortDestinations() throws
             ClientException {
-        final String path = "/proxy-resource/destinations/";
+        final String path = "/api/protected/destinations/";
         MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
         queryParams.add("type", DestinationType.COHORT.name());
         return doGet(path, CohortDestinationListType, queryParams);
@@ -432,21 +420,21 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
 
     public List<I2B2Destination> getI2B2Destinations() throws
             ClientException {
-        final String path = "/proxy-resource/destinations/";
+        final String path = "/api/protected/destinations/";
         MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
         queryParams.add("type", DestinationType.I2B2.name());
         return doGet(path, I2B2DestinationListType, queryParams);
     }
 
     public Destination getDestination(String destinationId) throws ClientException {
-        String path = UriBuilder.fromPath("/proxy-resource/destinations/")
+        String path = UriBuilder.fromPath("/api/protected/destinations/")
                 .segment(destinationId)
                 .build().toString();
         return doGet(path, Destination.class);
     }
 
     public void deleteDestination(Long id, String destinationId) throws ClientException {
-        String path = UriBuilder.fromPath("/proxy-resource/destinations/")
+        String path = UriBuilder.fromPath("/api/protected/destinations/")
                 .segment(destinationId)
                 .build().toString();
         doDelete(path);
@@ -454,7 +442,7 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
 
     //Search Functionality
     public List<String> getSystemPhenotypeSearchResults(String searchKey) throws ClientException {
-        final String path = UriBuilder.fromPath("/proxy-resource/concepts/search/")
+        final String path = UriBuilder.fromPath("/api/protected/concepts/search/")
                 .segment(searchKey)
                 .build().toString();
         return doGet(path, SystemPhenotypeSearchResultsList);
@@ -462,14 +450,14 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
 
     //Search Functionality
     public List<SystemPhenotype> getSystemPhenotypeSearchResultsBySearchKey(String searchKey) throws ClientException {
-        final String path = UriBuilder.fromPath("/proxy-resource/concepts/propsearch/")
+        final String path = UriBuilder.fromPath("/api/protected/concepts/propsearch/")
                 .segment(searchKey)
                 .build().toString();
         return doGet(path, SystemPhenotypeList);
     }
 
     public InputStream getOutput(String destinationId) throws ClientException {
-        String path = UriBuilder.fromPath("/proxy-resource/output/")
+        String path = UriBuilder.fromPath("/api/protected/output/")
                 .segment(destinationId)
                 .build().toString();
         return doGet(path, InputStream.class);
