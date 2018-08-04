@@ -28,12 +28,14 @@ import java.util.List;
  * @author Andrew Post
  */
 public class JobSpec {
+
+    private JobMode jobMode;
     
     public static enum Side {
         START,
         FINISH
     }
-
+    
     private String sourceConfigId;
     private String destinationId;
     private String dateRangePhenotypeKey;
@@ -41,7 +43,6 @@ public class JobSpec {
     private Side earliestDateSide;
     private Date latestDate;
     private Side latestDateSide;
-    private boolean updateData;
     private SourceConfig prompts;
     private List<String> propositionIds;
     private String name;
@@ -102,12 +103,12 @@ public class JobSpec {
         this.latestDateSide = latestDateSide;
     }
 
-    public boolean isUpdateData() {
-        return updateData;
+    public void setJobMode(JobMode jobMode) {
+        this.jobMode = jobMode;
     }
-
-    public void setUpdateData(boolean updateData) {
-        this.updateData = updateData;
+    
+    public JobMode getJobMode() {
+        return this.jobMode;
     }
 
     public SourceConfig getPrompts() {
