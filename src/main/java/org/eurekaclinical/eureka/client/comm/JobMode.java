@@ -28,6 +28,8 @@ public class JobMode {
     private Long id;
     private String name;
     private String description;
+    private int rank;
+    private boolean isDefault;
 
     public Long getId() {
         return id;
@@ -51,6 +53,22 @@ public class JobMode {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public boolean isDefault() {
+        return isDefault;
+    }
+
+    public void setDefault(boolean isDefault) {
+        this.isDefault = isDefault;
     }
     
 }
