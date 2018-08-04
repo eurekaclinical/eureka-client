@@ -30,7 +30,7 @@
     </issueManagement>
     
     <properties>
-        <eurekaclinical-common-version>[3.0,4.0)</eurekaclinical-common-version>
+        <eurekaclinical-common-version>[3.1-Beta-2,4.0)</eurekaclinical-common-version>
     </properties>
 	
     <build>
