@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class JobSpec {
 
-    private JobMode jobMode;
+    private Long jobMode;
     
     public static enum Side {
         START,
@@ -103,11 +103,11 @@ public class JobSpec {
         this.latestDateSide = latestDateSide;
     }
 
-    public void setJobMode(JobMode jobMode) {
+    public void setJobMode(Long jobMode) {
         this.jobMode = jobMode;
     }
     
-    public JobMode getJobMode() {
+    public Long getJobMode() {
         return this.jobMode;
     }
 
