@@ -24,7 +24,6 @@ import java.util.List;
 public final class ValueThreshold {
 
     private PhenotypeField phenotype;
-    private Phenotype phenotypeNested;
     private Long lowerComp;
     private Long upperComp;
 
@@ -36,7 +35,6 @@ public final class ValueThreshold {
     private String upperUnits;
     private Long relationOperator;
     private List<PhenotypeField> relatedPhenotypes;
-    private List<Phenotype> relatedPhenotypesNested;
     private Integer withinAtLeast;
     private Long withinAtLeastUnit;
     private Integer withinAtMost;
@@ -49,15 +47,6 @@ public final class ValueThreshold {
     public void setPhenotype(PhenotypeField phenotype) {
         this.phenotype = phenotype;
     }
-    
-    public Phenotype phenotypeNested() {
-        return phenotypeNested;
-    }
-
-    public void setPhenotypeNested(Phenotype phenotypeNested) {
-        this.phenotypeNested = phenotypeNested;
-    }
-
     
     public Long getLowerComp() {
         return lowerComp;
@@ -123,14 +112,6 @@ public final class ValueThreshold {
         this.relatedPhenotypes = relatedPhenotypes;
     }
     
-    public List<Phenotype> getRelatedPhenotypesNested(){
-        return this.relatedPhenotypesNested;
-    }
-    
-    public void setRelatedPhenotypesNested(List<Phenotype> pe) {
-        this.relatedPhenotypesNested = pe;
-    }
-
     public Integer getWithinAtLeast() {
         return withinAtLeast;
     }
