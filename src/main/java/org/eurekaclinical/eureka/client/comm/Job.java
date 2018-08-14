@@ -49,6 +49,7 @@ public class Job {
     private List<Link> links;
     private boolean getStatisticsSupported;
     private Date finishTimeStamp;
+    private JobMode jobMode;
 
     public Long getId() {
         return id;
@@ -138,6 +139,14 @@ public class Job {
 
     public void setFinishTimestamp(Date timestamp) {
         this.finishTimeStamp = timestamp;
+    }
+    
+    public void setJobMode(JobMode jobMode) {
+        this.jobMode = jobMode;
+    }
+    
+    public JobMode getJobMode() {
+        return this.jobMode;
     }
 
     /**
