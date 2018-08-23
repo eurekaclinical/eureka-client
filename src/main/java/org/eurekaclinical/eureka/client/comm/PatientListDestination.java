@@ -1,10 +1,10 @@
 package org.eurekaclinical.eureka.client.comm;
 
-/*
+/*-
  * #%L
- * Eureka Common
+ * Eureka! Client
  * %%
- * Copyright (C) 2012 - 2014 Emory University
+ * Copyright (C) 2016 - 2018 Emory University
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,25 +19,16 @@ package org.eurekaclinical.eureka.client.comm;
  * limitations under the License.
  * #L%
  */
+
 /**
  *
  * @author Andrew Post
  */
-public interface DestinationVisitor {
+public class PatientListDestination extends Destination {
 
-    void visit(CohortDestination cohortDestination);
-
-    void visit(I2B2Destination i2b2Destination);
-
-    void visit(Neo4jDestination neo4jDestination);
-
-    void visit(PatientSetExtractorDestination patientSetExtractorDestination);
+    @Override
+    public void accept(DestinationVisitor destinationVisitor) {
+        destinationVisitor.visit(this);
+    }
     
-    void visit(PatientSetSenderDestination patientSetSenderDestination);
-    
-    void visit(TabularFileDestination tabularFileDestination);
-    
-    void visit(RelDbDestination relDbDestination);
-    
-    void visit(PatientListDestination patientListDestination);
 }

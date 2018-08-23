@@ -20,6 +20,8 @@ package org.eurekaclinical.eureka.client.comm;
  * #L%
  */
 import java.util.Date;
+import org.protempa.proposition.value.Value;
+import org.protempa.proposition.value.ValueComparator;
 
 /**
  *
@@ -32,7 +34,13 @@ public class Literal extends Node {
     private Date start;
 
     private Date finish;
-
+    
+    private String propertyName;
+    
+    private ValueComparator propertyValueComparator;
+    
+    private Value propertyValue;
+    
     public String getName() {
         return name;
     }
@@ -57,6 +65,30 @@ public class Literal extends Node {
         this.finish = finish;
     }
 
+    public String getPropertyName() {
+        return propertyName;
+    }
+
+    public void setPropertyName(String propertyName) {
+        this.propertyName = propertyName;
+    }
+
+    public ValueComparator getPropertyValueComparator() {
+        return propertyValueComparator;
+    }
+
+    public void setPropertyValueComparator(ValueComparator propertyValueComparator) {
+        this.propertyValueComparator = propertyValueComparator;
+    }
+
+    public Value getPropertyValue() {
+        return propertyValue;
+    }
+
+    public void setPropertyValue(Value propertyValue) {
+        this.propertyValue = propertyValue;
+    }
+
     @Override
     public void accept(NodeVisitor nodeVisitor) {
         nodeVisitor.visit(this);
@@ -64,7 +96,9 @@ public class Literal extends Node {
     
     @Override
     public String toString() {
-        return "Literal{" + "name=" + name + ", start=" + start + ", finish=" + finish + '}';
+        return "Literal{" + "name=" + name + ", start=" + start + ", finish=" + finish + 
+                ", propertyName=" + propertyName + ", propertyValueComparator=" + propertyValueComparator +
+                ", propertyValue=" + propertyValue + '}';
     }
     
 }

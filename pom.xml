@@ -31,6 +31,7 @@
     
     <properties>
         <eurekaclinical-common-version>[3.1-Beta-2,4.0)</eurekaclinical-common-version>
+        <protempa-version>[5.0-Beta-12-SNAPSHOT,5.0)</protempa-version>
     </properties>
 	
     <build>
@@ -52,6 +53,11 @@
             <groupId>org.eurekaclinical</groupId>
             <artifactId>eurekaclinical-common</artifactId>
             <version>${eurekaclinical-common-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eurekaclinical</groupId>
+            <artifactId>protempa-framework</artifactId>
+            <version>${protempa-version}</version>
         </dependency>
     </dependencies>
 </project>
