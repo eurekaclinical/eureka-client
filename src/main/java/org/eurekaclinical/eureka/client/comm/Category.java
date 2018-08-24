@@ -40,8 +40,6 @@ public final class Category extends Phenotype {
 
     private List<PhenotypeField> children
             = new ArrayList<>();
-    private List<Phenotype> members
-            = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private CategoricalType categoricalType;
@@ -58,14 +56,6 @@ public final class Category extends Phenotype {
         this.children = children;
     }
     
-    public List<Phenotype> getMembers() {
-        return members;
-    }
-
-    public void setMembers(List<Phenotype> members) {
-        this.members = members;
-    }
-
     public CategoricalType getCategoricalType() {
         return categoricalType;
     }
