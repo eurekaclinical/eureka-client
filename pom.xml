@@ -31,7 +31,7 @@
     
     <properties>
         <eurekaclinical-common-version>[4.0-Beta-1,4.0)</eurekaclinical-common-version>
-        <protempa-version>[5.0-Beta-12,5.0)</protempa-version>
+        <protempa-version>[5.0-Beta-13,5.0)</protempa-version>
     </properties>
 	
     <build>
