@@ -39,5 +39,4 @@ public class CohortDestination extends Destination {
     public void accept(DestinationVisitor destinationVisitor) {
         destinationVisitor.visit(this);
     }
-
 }
