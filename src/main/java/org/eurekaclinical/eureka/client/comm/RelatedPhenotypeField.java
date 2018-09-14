@@ -28,6 +28,7 @@ public final class RelatedPhenotypeField {
     private PhenotypeField phenotypeField;
     private Long relationOperator;
     private String sequentialPhenotype;
+    private PhenotypeField sequentialPhenotypeField;
     private Long sequentialPhenotypeSource;
     private Integer relationMinCount;
     private Long relationMinUnits;
@@ -56,6 +57,14 @@ public final class RelatedPhenotypeField {
 
     public void setSequentialPhenotype(String rhsPhenotype) {
         this.sequentialPhenotype = rhsPhenotype;
+    }
+
+    public PhenotypeField getSequentialPhenotypeField() {
+        return sequentialPhenotypeField;
+    }
+
+    public void setSequentialPhenotypeField(PhenotypeField rhsPhenotype) {
+        this.sequentialPhenotypeField= rhsPhenotype;
     }
 
     public Integer getRelationMinCount() {
