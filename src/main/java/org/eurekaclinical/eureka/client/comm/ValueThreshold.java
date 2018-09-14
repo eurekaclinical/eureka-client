@@ -47,7 +47,7 @@ public final class ValueThreshold {
     public void setPhenotype(PhenotypeField phenotype) {
         this.phenotype = phenotype;
     }
-
+    
     public Long getLowerComp() {
         return lowerComp;
     }
@@ -111,7 +111,7 @@ public final class ValueThreshold {
     public void setRelatedPhenotypes(List<PhenotypeField> relatedPhenotypes) {
         this.relatedPhenotypes = relatedPhenotypes;
     }
-
+    
     public Integer getWithinAtLeast() {
         return withinAtLeast;
     }

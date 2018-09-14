@@ -55,7 +55,7 @@ public final class Category extends Phenotype {
     public void setChildren(List<PhenotypeField> children) {
         this.children = children;
     }
-
+    
     public CategoricalType getCategoricalType() {
         return categoricalType;
     }
