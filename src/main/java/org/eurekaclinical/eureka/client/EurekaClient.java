@@ -42,6 +42,7 @@ import org.eurekaclinical.eureka.client.comm.Destination;
 import org.eurekaclinical.eureka.client.comm.DestinationType;
 import org.eurekaclinical.eureka.client.comm.I2B2Destination;
 import org.eurekaclinical.eureka.client.comm.Job;
+import org.eurekaclinical.eureka.client.comm.JobMode;
 import org.eurekaclinical.eureka.client.comm.JobSpec;
 import org.eurekaclinical.eureka.client.comm.Phenotype;
 import org.eurekaclinical.eureka.client.comm.SourceConfig;
@@ -78,6 +79,8 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
     private static final GenericType<List<Role>> RoleList = new GenericType<List<Role>>() {
     };
     private static final GenericType<List<Job>> JobList = new GenericType<List<Job>>() {
+    };
+    private static final GenericType<List<JobMode>> JobModeList = new GenericType<List<JobMode>>() {
     };
     private static final GenericType<List<User>> UserList = new GenericType<List<User>>() {
     };
@@ -142,6 +145,11 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
         final String path = "/api/protected/jobs/" + jobId;
         return doGet(path, Job.class);
     }
+    
+    public JobMode getJobMode(Long jobModeId) throws ClientException {
+        final String path = "/api/protected/jobmodes/" + jobModeId;
+        return doGet(path, JobMode.class);
+    }
 
     public Statistics getJobStats(Long jobId, String propId) throws ClientException {
         if (jobId == null) {
@@ -158,6 +166,11 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
     public List<Job> getJobs() throws ClientException {
         final String path = "/api/protected/jobs";
         return doGet(path, JobList);
+    }
+    
+    public List<JobMode> getJobModes() throws ClientException {
+        final String path = "/api/protected/jobmodes";
+        return doGet(path, JobModeList);
     }
 
     public List<Job> getJobsDesc() throws ClientException {
