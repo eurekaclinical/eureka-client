@@ -150,6 +150,11 @@ public class EurekaClient extends AuthorizingEurekaClinicalClient {
         final String path = "/api/protected/jobmodes/" + jobModeId;
         return doGet(path, JobMode.class);
     }
+    
+    public JobMode getJobModeByName(String name) throws ClientException {
+        final String path = "/api/protected/jobmodes/byname/" + name;
+        return doGet(path, JobMode.class);
+    }
 
     public Statistics getJobStats(Long jobId, String propId) throws ClientException {
         if (jobId == null) {
