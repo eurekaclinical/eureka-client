@@ -1,10 +1,12 @@
 package org.eurekaclinical.eureka.client.comm;
 
-/*
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+/*-
  * #%L
- * Eureka Common
+ * Eureka! Client
  * %%
- * Copyright (C) 2012 - 2014 Emory University
+ * Copyright (C) 2016 - 2019 Emory University
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +22,17 @@ package org.eurekaclinical.eureka.client.comm;
  * #L%
  */
 
-/**
- *
- * @author Andrew Post
- */
-public enum DestinationType {
-	I2B2, COHORT, PATIENT_SET_EXTRACTOR, PATIENT_SET_SENDER, TABULAR_FILE, RELDB, AOU_PARTICIPANT
-    
+import org.eurekaclinical.eureka.client.comm.Destination;
+import org.eurekaclinical.eureka.client.comm.DestinationVisitor;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class AOUParticipantDestination extends Destination {
+
+
+       @Override
+       public void accept(DestinationVisitor destinationVisitor) {
+           destinationVisitor.visit(this);
+       }
+
+
 }
