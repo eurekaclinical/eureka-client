@@ -3,7 +3,7 @@
     <groupId>org.eurekaclinical</groupId>
     <artifactId>eureka-client</artifactId>
     <packaging>jar</packaging>
-    <version>5.0-Alpha-5-SNAPSHOT</version>
+    <version>5.0-Alpha-8-SNAPSHOT</version>
     <name>Eureka! Client</name>
     <description>Client for accessing Eureka!'s web services.
     </description>
@@ -12,7 +12,7 @@
     <parent>
         <groupId>org.eurekaclinical</groupId>
         <artifactId>eurekaclinical-parent-standard-deps</artifactId>
-        <version>3</version>
+        <version>4-Alpha-3</version>
     </parent>
 
     <url>https://github.com/eurekaclinical/eureka-client.git</url>
@@ -30,8 +30,8 @@
     </issueManagement>
     
     <properties>
-        <eurekaclinical-common-version>[4.0,5.0)</eurekaclinical-common-version>
-        <protempa-version>[5.0,6.0)</protempa-version>
+        <eurekaclinical-common-version>5.0-Alpha-6</eurekaclinical-common-version>
+        <protempa-version>5.1-Beta-3</protempa-version>
     </properties>
 	
     <build>
