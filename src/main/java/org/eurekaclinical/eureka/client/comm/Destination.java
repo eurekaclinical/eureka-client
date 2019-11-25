@@ -22,6 +22,7 @@ package org.eurekaclinical.eureka.client.comm;
 import java.util.Date;
 import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
@@ -34,6 +35,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
  * @author hrathod
  *
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = CohortDestination.class, name = "COHORT"),
