@@ -64,6 +64,7 @@ public class JobFilter {
 	 * @param inState Search for all jobs in a given state.
 	 * @param inFrom Search for all jobs with a timestamp after the given time.
 	 * @param inTo Search for all jobs with a timestamp before the given time.
+	 * @param latest true or false for latest job
 	 */
 	public JobFilter(final Long inJobId, final Long inUserId,
 			final String inState, final Date inFrom,
