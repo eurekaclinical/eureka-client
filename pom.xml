@@ -30,8 +30,8 @@
     </issueManagement>
     
     <properties>
-        <eurekaclinical-common-version>[5.0-Alpha-6,)</eurekaclinical-common-version>
-        <protempa-version>[5.1-Beta-5,)</protempa-version>    
+        <eurekaclinical-common-version>[5.0,)</eurekaclinical-common-version>
+        <protempa-version>[5.1,)</protempa-version>    
     </properties>
 	
     <build>
