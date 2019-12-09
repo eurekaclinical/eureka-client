@@ -40,4 +40,6 @@ public interface DestinationVisitor {
     void visit(RelDbDestination relDbDestination);
     
     void visit(PatientListDestination patientListDestination);
+
+	void visit(OmopDestination omopDestination);
 }
