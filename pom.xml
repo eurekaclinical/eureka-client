@@ -3,7 +3,7 @@
     <groupId>org.eurekaclinical</groupId>
     <artifactId>eureka-client</artifactId>
     <packaging>jar</packaging>
-    <version>5.1-Alpha-1-SNAPSHOT</version>
+    <version>5.1-Alpha-2-SNAPSHOT</version>
     <name>Eureka! Client</name>
     <description>Client for accessing Eureka!'s web services.
     </description>
