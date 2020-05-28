@@ -45,7 +45,9 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
     @JsonSubTypes.Type(value = PatientSetSenderDestination.class, name = "PATIENTSETSENDER"),
     @JsonSubTypes.Type(value = TabularFileDestination.class, name = "TABULARFILE"),
     @JsonSubTypes.Type(value = RelDbDestination.class, name = "RELDB"),
-    @JsonSubTypes.Type(value = PatientListDestination.class, name="PATIENTLIST")
+    @JsonSubTypes.Type(value = PatientListDestination.class, name="PATIENTLIST"),
+    @JsonSubTypes.Type(value = OmopDestination.class, name="AOUPARTICIPANT"),
+    @JsonSubTypes.Type(value = PhenotypeSearchDestination.class, name="PHENOTYPESEARCH")
 })
 public abstract class Destination {
 
