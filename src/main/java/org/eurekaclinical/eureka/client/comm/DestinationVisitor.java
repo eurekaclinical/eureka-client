@@ -42,4 +42,6 @@ public interface DestinationVisitor {
     void visit(PatientListDestination patientListDestination);
 
 	void visit(OmopDestination omopDestination);
+	
+	void visit(PhenotypeSearchDestination phenotypeSearchDestination);
 }
