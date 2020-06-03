@@ -24,7 +24,7 @@ package org.eurekaclinical.eureka.client.comm;
  *
  * @author Nita Deshpande
  */
-public class OmopDestination extends Destination {
+public class OmopDestination extends AbstractTabularDestination {
     
     @Override
     public void accept(DestinationVisitor destinationVisitor) {
