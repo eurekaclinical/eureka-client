@@ -47,7 +47,8 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
     @JsonSubTypes.Type(value = RelDbDestination.class, name = "RELDB"),
     @JsonSubTypes.Type(value = PatientListDestination.class, name="PATIENTLIST"),
     @JsonSubTypes.Type(value = OmopDestination.class, name="AOUPARTICIPANT"),
-    @JsonSubTypes.Type(value = PhenotypeSearchDestination.class, name="PHENOTYPESEARCH")
+    @JsonSubTypes.Type(value = PhenotypeSearchDestination.class, name="PHENOTYPESEARCH"),
+    @JsonSubTypes.Type(value = CovidOmopDestination.class, name="COVIDOMOP")
 })
 public abstract class Destination {
 
